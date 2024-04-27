@@ -11,6 +11,8 @@
   --color2: #fa9810;
   --color3: #e11428;
   --color4: #43936c;
+  --taskgrup-background: #fafafa;
+  --taskgrup-border: 1px solid #e0e0e0;
 
   --max-width: 1100px;
   --border-radius: 12px;
@@ -36,8 +38,31 @@
   );
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wdth,wght@0,6..12,75..125,200..1000;1,6..12,75..125,200..1000&display=swap");
+@font-face {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wdth,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800;1,900&display=swap");
+  /* Sesuaikan URL dengan link font yang sesuai dari Google Fonts */
+}
 
+/* Seluruh komponen menggunakan font Nunito Sans */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+/* Atau jika ingin menerapkan ke semua elemen */
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
 * {
   padding: 0;
   margin: 0;

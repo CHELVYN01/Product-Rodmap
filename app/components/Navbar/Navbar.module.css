@@ -1,12 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wdth,wght@0,6..12,75..125,200..1000;1,6..12,75..125,200..1000&display=swap");
-
 .nav {
   display: flex;
   background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
 }
 .logo {
-  font-family: "Nunito Sans";
+  font-family: "Nunito Sans", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;

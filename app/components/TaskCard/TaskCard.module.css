@@ -1,0 +1,25 @@
+.container {
+  background-color: var(--taskgrup-background);
+  border: var(--taskgrup-border);
+  padding: 8px 16px;
+}
+
+.title {
+  font-family: "Nunito Sans", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 24px;
+  margin: 16px 16px;
+
+  /* background-color: aquamarine; */
+}
+
+.noTask {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 24px;
+  margin: 16px 16px;
+  color: #999; /* Atur gaya untuk "No Task" */
+}
