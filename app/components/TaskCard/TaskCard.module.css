@@ -11,6 +11,7 @@
   font-size: 17px;
   line-height: 24px;
   margin: 16px 16px;
+  color: #404040;
 
   /* background-color: aquamarine; */
 }
@@ -21,5 +22,60 @@
   font-size: 17px;
   line-height: 24px;
   margin: 16px 16px;
-  color: #999; /* Atur gaya untuk "No Task" */
+  color: #757575; /* Atur gaya untuk "No Task" */
+}
+
+/* end task card */
+.progressContainer {
+  display: flex;
+  align-items: center;
+  width: 275px;
+  height: 16px;
+  background-color: #ededed;
+  border: none;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+/* TaskCard.module.css */
+.progress {
+  height: 16px;
+  border-radius: 8px 0 0 8px;
+  -webkit-border-radius: 8px 0 0 8px;
+  -moz-border-radius: 8px 0 0 8px;
+  -ms-border-radius: 8px 0 0 8px;
+  -o-border-radius: 8px 0 0 8px;
+}
+
+.progress.rounded {
+  border-radius: 8px; /* Radius 8px untuk keseluruhan progress */
+}
+
+.progress.incomplete {
+  border-radius: 8px 0 0 8px;
+
+  -webkit-border-radius: 8px 0 0 8px;
+  -moz-border-radius: 8px 0 0 8px;
+  -ms-border-radius: 8px 0 0 8px;
+  -o-border-radius: 8px 0 0 8px;
+}
+.icon {
+  display: flex;
+}
+.progressBar {
+  display: flex;
+  align-items: center;
+  margin: 16px;
+  gap: 12px;
+}
+
+.progressIncomplete {
+  background-color: #01959f;
+}
+
+.progressComplete {
+  background-color: #43936c;
 }

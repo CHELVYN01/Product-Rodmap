@@ -13,23 +13,43 @@ function Page() {
         {/* Menyertakan TaskCard di setiap MainCard */}
         <MainCard
           groupName="Grup Task 1"
-          taskCard={
-            <TaskCard taskName="Re-designed the zero-g doggie bags. No more spills!" />
-          }
+          taskCard={[
+            <TaskCard
+              key={1}
+              taskName="Re-designed the zero-g doggie bags. No more spills!"
+              progress={100}
+            />,
+            <TaskCard
+              key={2}
+              taskName="Re-designed the zero-g doggie bags. No more spills!"
+              progress={30}
+            />,
+          ]}
         />
-        <MainCard groupName="Grup Task 2" taskCard={<TaskCard />} />{" "}
+        <MainCard
+          groupName="Grup Task 2"
+          taskCard={[<TaskCard key={1} taskName="" />]}
+        />
         {/* Tidak menyertakan prop taskName */}
         <MainCard
           groupName="Grup Task 3"
-          taskCard={
-            <TaskCard taskName="Data Migration: Performance & Culture End Game" />
-          }
+          taskCard={[
+            <TaskCard
+              key={1}
+              taskName="Data Migration: Performance & Culture End Game"
+              progress={60}
+            />,
+          ]}
         />
         <MainCard
           groupName="Grup Task 4"
-          taskCard={
-            <TaskCard taskName="Bundle interplanetary analytics for improved transmission" />
-          }
+          taskCard={[
+            <TaskCard
+              key={1}
+              taskName="Bundle interplanetary analytics for improved transmission"
+              progress={20}
+            />,
+          ]}
         />
       </div>
     </div>

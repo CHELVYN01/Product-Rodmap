@@ -3,7 +3,7 @@ import style from "./MainCard.module.css";
 
 interface MainCardProps {
   groupName: string;
-  taskCard: React.ReactNode;
+  taskCard: React.ReactNode[];
 }
 
 function MainCard({ groupName, taskCard }: MainCardProps) {
@@ -38,7 +38,14 @@ function MainCard({ groupName, taskCard }: MainCardProps) {
       <div className={`${style.card} ${groupStyle}`}>
         <div className={style.name}>{groupName}</div>
         <div className={style.dateCard}>{dateCard}</div>
-        <div className={style.taskCard}>{taskCard}</div>
+        <div className={style.containerTask}>
+          {taskCard.map((taskCard, index) => (
+            <div className={style.taskCard} key={index}>
+              {taskCard}
+            </div>
+          ))}
+        </div>
+
         <div className={style.addcard}>
           <svg
             width="18"
