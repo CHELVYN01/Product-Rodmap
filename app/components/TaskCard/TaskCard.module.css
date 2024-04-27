@@ -1,4 +1,7 @@
 .container {
+  max-width: inherit;
+  width: 92%;
+
   background-color: var(--taskgrup-background);
   border: var(--taskgrup-border);
   padding: 8px 16px;
@@ -12,8 +15,6 @@
   line-height: 24px;
   margin: 16px 16px;
   color: #404040;
-
-  /* background-color: aquamarine; */
 }
 
 .noTask {
@@ -26,10 +27,12 @@
 }
 
 /* end task card */
+
 .progressContainer {
   display: flex;
   align-items: center;
-  width: 275px;
+  max-width: inherit;
+  width: 195px;
   height: 16px;
   background-color: #ededed;
   border: none;
@@ -70,6 +73,9 @@
   align-items: center;
   margin: 16px;
   gap: 12px;
+  max-width: 311px;
+  width: 90%;
+  /* background-color: aqua; */
 }
 
 .progressIncomplete {

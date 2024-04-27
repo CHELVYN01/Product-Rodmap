@@ -1,8 +1,8 @@
 /* main card */
 .container {
-  /* background-color: #e06666; */
-  max-width: 449px;
-  width: 100%;
+  max-width: 100%;
+  width: 294px;
+  flex-grow: 1;
 }
 
 .card {
@@ -88,9 +88,10 @@
   font-family: "Nunito Sans", sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
   margin: 8px 0px;
+  color: #404040;
 }
 
 /* end date card */

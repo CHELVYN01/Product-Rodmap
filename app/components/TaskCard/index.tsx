@@ -9,7 +9,7 @@ interface TaskCardProps {
 }
 
 function TaskCard({ taskName, progress }: TaskCardProps) {
-  const progressBarWidth = progress && progress <= 100 ? progress * 3 : 0; // Mengubah nilai progres menjadi lebar progress bar
+  const progressBarWidth = progress && progress <= 100 ? progress * 2 : 0; // Mengubah nilai progres menjadi lebar progress bar
 
   return (
     <div
