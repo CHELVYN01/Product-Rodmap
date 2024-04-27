@@ -1,4 +1,17 @@
 :root {
+  --grup1-background: #f7feff;
+  --grup1-border: 1px solid #01959f;
+  --grup2-background: #fffcf5;
+  --grup2-border: 1px solid #feeabc;
+  --grup3-background: #fffafa;
+  --grup3-border: 1px solid #f5b1b7;
+  --grup4-background: #f8fbf9;
+  --grup4-border: 1px solid #b8dbca;
+  --color1: #01959f;
+  --color2: #fa9810;
+  --color3: #e11428;
+  --color4: #43936c;
+
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
@@ -22,6 +35,8 @@
     rgba(255, 255, 255, 0)
   );
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wdth,wght@0,6..12,75..125,200..1000;1,6..12,75..125,200..1000&display=swap");
 
 * {
   padding: 0;

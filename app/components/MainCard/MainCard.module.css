@@ -1,0 +1,81 @@
+.container {
+  /* background-color: #e06666; */
+  max-width: 449px;
+  width: 100%;
+}
+
+.card {
+  padding: 16px;
+  height: auto;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  padding: 2px 8px 2px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.group1 .name {
+  color: var(--color1);
+  border: var(--grup1-border);
+  height: auto;
+  width: 88px;
+}
+
+.group2 .name {
+  color: var(--color2);
+  border: var(--grup2-border);
+  height: auto;
+  width: 88px;
+}
+
+.group3 .name {
+  color: var(--color3);
+  border: var(--grup3-border);
+  height: auto;
+  width: 88px;
+}
+
+.group4 .name {
+  color: var(--color4);
+  border: var(--grup4-border);
+  height: auto;
+  width: 88px;
+}
+
+.group1 {
+  background-color: var(--grup1-background);
+  border: var(--grup1-border);
+}
+
+.group2 {
+  background-color: var(--grup2-background);
+  border: var(--grup2-border);
+}
+
+.group3 {
+  background-color: var(--grup3-background);
+  border: var(--grup3-border);
+}
+
+.group4 {
+  background-color: var(--grup4-background);
+  border: var(--grup4-border);
+}
