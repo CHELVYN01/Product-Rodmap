@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import style from "./TaskCard.module.css";
-import Delete from "../TaskMenu/Delete";
-import EditTask from "../TaskMenu/Edit";
 
 interface TaskCardProps {
   taskName?: string;
@@ -19,13 +17,9 @@ function TaskCard({
 }: TaskCardProps) {
   const progressBarWidth = progress && progress <= 100 ? progress * 2 : 0; //
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isNewTaskPopupOpen, setIsNewTaskPopupOpen] = useState(false); // State untuk diklik
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const toggleNewTaskPopup = () => {
-    setIsNewTaskPopupOpen(!isNewTaskPopupOpen);
   };
 
   useEffect(() => {
@@ -209,7 +203,7 @@ function TaskCard({
             )}
           </a>
           <a className={style.linkMenu} href="#">
-            <div className={style.containerMenu} onClick={toggleNewTaskPopup}>
+            <div className={style.containerMenu}>
               <div className={style.iconMenu}>
                 <svg
                   width="20"
@@ -240,7 +234,7 @@ function TaskCard({
           </a>
           <a className={style.linkMenu} href="#">
             <div className={style.containerMenu}>
-              <div className={style.iconMenuD} onClick={toggleNewTaskPopup}>
+              <div className={style.iconMenuD}>
                 <svg
                   width="18"
                   height="20"
@@ -267,8 +261,6 @@ function TaskCard({
           </a>
         </div>
       )}
-      {isNewTaskPopupOpen && <Delete />}
-      {isNewTaskPopupOpen && <EditTask />}
     </div>
   );
 }
