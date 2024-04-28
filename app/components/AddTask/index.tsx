@@ -1,7 +1,7 @@
 import React from "react";
-import style from "./delete.module.css";
+import style from "./AddTask.module.css";
 
-function Delete() {
+function AddTask() {
   return (
     <div>
       <div className={style.popup}>
@@ -36,4 +36,4 @@ function Delete() {
   );
 }
 
-export default Delete;
+export default AddTask;
