@@ -1,7 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import style from "./MainCard.module.css";
-import AddTask from "@/app/components/AddTask";
 
 interface MainCardProps {
   groupName: string;
@@ -9,11 +8,6 @@ interface MainCardProps {
 }
 
 function MainCard({ groupName, taskCard }: MainCardProps) {
-  const [isNewTaskPopupOpen, setIsNewTaskPopupOpen] = useState(false);
-  const toggleNewTaskPopup = () => {
-    setIsNewTaskPopupOpen(!isNewTaskPopupOpen);
-  };
-
   let groupStyle;
   let dateCard;
 
@@ -53,7 +47,7 @@ function MainCard({ groupName, taskCard }: MainCardProps) {
           ))}
         </div>
 
-        <div className={style.addcard} onClick={toggleNewTaskPopup}>
+        <div className={style.addcard}>
           <svg
             width="18"
             height="18"
@@ -70,7 +64,6 @@ function MainCard({ groupName, taskCard }: MainCardProps) {
           New Task
         </div>
       </div>
-      {isNewTaskPopupOpen && <AddTask />}
     </div>
   );
 }
