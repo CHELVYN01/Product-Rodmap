@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import style from "./MainCard.module.css";
+import TaskCard from "../TaskCard";
+import NewTask from "../NewTask";
 
 interface MainCardProps {
   groupName: string;
@@ -8,6 +10,12 @@ interface MainCardProps {
 }
 
 function MainCard({ groupName, taskCard }: MainCardProps) {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   let groupStyle;
   let dateCard;
 
@@ -47,7 +55,7 @@ function MainCard({ groupName, taskCard }: MainCardProps) {
           ))}
         </div>
 
-        <div className={style.addcard}>
+        <div className={style.addcard} onClick={() => toggleMenu()}>
           <svg
             width="18"
             height="18"
@@ -64,6 +72,7 @@ function MainCard({ groupName, taskCard }: MainCardProps) {
           New Task
         </div>
       </div>
+      <div className={style.popup}>{isMenuOpen && <NewTask />}</div>
     </div>
   );
 }

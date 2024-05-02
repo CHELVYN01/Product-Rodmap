@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import MainCard from "./components/MainCard";
 import style from "./page.module.css";
 import TaskCard from "./components/TaskCard";
+import NewTask from "./components/NewTask";
 
 function Page() {
   // Menyimpan daftar kartu tugas di setiap grup
@@ -182,6 +183,7 @@ function Page() {
           }
         />
       </div>
+      {/* <NewTask /> */}
     </div>
   );
 }
