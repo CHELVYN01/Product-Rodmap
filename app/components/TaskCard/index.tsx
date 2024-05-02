@@ -45,32 +45,22 @@ function TaskCard({
         `.${style.popupDelete}`
       ) as HTMLElement;
 
-      if (!isMenuOpen && !popup.contains(target)) {
-        setIsMenuOpen(false);
-      }
-      if (
-        isOpenEdit &&
-        !popupEdit.contains(target) &&
-        !popupEdit.contains(target)
-      ) {
-        setIsOpenEdit(false);
-      }
-      if (
-        isOpenDelete &&
-        !popupDelete.contains(target) &&
-        !popupDelete.contains(target)
-      ) {
-        setIsOpenDelete(false);
+      // Jika salah satu menu terbuka, maka tutup menu lainnya
+      if (isMenuOpen || isOpenEdit || isOpenDelete) {
+        if (
+          !popup.contains(target) &&
+          !popupEdit.contains(target) &&
+          !popupDelete.contains(target)
+        ) {
+          setIsMenuOpen(false);
+          setIsOpenEdit(false);
+          setIsOpenDelete(false);
+        }
       }
     };
 
-    if (isMenuOpen) {
-      document.addEventListener("click", handleClickOutside);
-    }
-    if (isOpenEdit) {
-      document.addEventListener("click", handleClickOutside);
-    }
-    if (isOpenDelete) {
+    // Tambahkan event listener hanya jika salah satu menu terbuka
+    if (isMenuOpen || isOpenEdit || isOpenDelete) {
       document.addEventListener("click", handleClickOutside);
     }
 
