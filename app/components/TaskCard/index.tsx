@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./TaskCard.module.css";
 import EditTask from "../EditTask";
+import DeleteTask from "../Delete";
 
 interface TaskCardProps {
   taskName?: string;
@@ -19,6 +20,8 @@ function TaskCard({
   const progressBarWidth = progress && progress <= 100 ? progress * 2 : 0; //
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [isOpenDelete, setIsOpenDelete] = useState(false);
+  const [isHendelClose, setIsHendelClose] = useState(false);
 
   const toggleEditMenu = () => {
     setIsOpenEdit(!isOpenEdit);
@@ -27,12 +30,19 @@ function TaskCard({
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const toggleDeleteMenu = () => {
+    setIsOpenDelete(!isOpenDelete);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       const popup = document.querySelector(`.${style.popup}`) as HTMLElement;
       const popupEdit = document.querySelector(
         `.${style.popupEdit}`
+      ) as HTMLElement;
+      const popupDelete = document.querySelector(
+        `.${style.popupDelete}`
       ) as HTMLElement;
 
       if (!isMenuOpen && !popup.contains(target)) {
@@ -45,6 +55,13 @@ function TaskCard({
       ) {
         setIsOpenEdit(false);
       }
+      if (
+        isOpenDelete &&
+        !popupDelete.contains(target) &&
+        !popupDelete.contains(target)
+      ) {
+        setIsOpenDelete(false);
+      }
     };
 
     if (isMenuOpen) {
@@ -53,11 +70,14 @@ function TaskCard({
     if (isOpenEdit) {
       document.addEventListener("click", handleClickOutside);
     }
+    if (isOpenDelete) {
+      document.addEventListener("click", handleClickOutside);
+    }
 
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [isMenuOpen, isOpenEdit]);
+  }, [isMenuOpen, isOpenEdit, isOpenDelete]);
 
   return (
     <div
@@ -254,7 +274,11 @@ function TaskCard({
               <p className={style.textMenu}>Edit</p>
             </div>
           </a>
-          <a className={style.linkMenu} href="#">
+          <a
+            className={style.linkMenu}
+            href="#Delete"
+            onClick={toggleDeleteMenu}
+          >
             <div className={style.containerMenu}>
               <div className={style.iconMenuD}>
                 <svg
@@ -284,6 +308,7 @@ function TaskCard({
         </div>
       )}
       <div className={style.popupEdit}>{isOpenEdit && <EditTask />}</div>
+      <div className={style.popupDelete}>{isOpenDelete && <DeleteTask />}</div>
     </div>
   );
 }

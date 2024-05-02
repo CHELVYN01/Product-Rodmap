@@ -182,3 +182,16 @@
   z-index: 999;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
+.popupDelete {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 20%;
+  left: 150%;
+  width: 320px;
+  /* height: 160px; */
+  background-color: #ffffff;
+  border-radius: 8px;
+  z-index: 999;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
