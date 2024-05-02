@@ -222,7 +222,7 @@ function TaskCard({
           </a>
           <a
             className={style.linkMenu}
-            href="edit"
+            href="#edit"
             onClick={() => toggleEditMenu()}
           >
             <div className={style.containerMenu}>
@@ -283,7 +283,7 @@ function TaskCard({
           </a>
         </div>
       )}
-      <div className={style.popupEdit}>{isMenuOpen && <EditTask />}</div>
+      <div className={style.popupEdit}>{isOpenEdit && <EditTask />}</div>
     </div>
   );
 }
