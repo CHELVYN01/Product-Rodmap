@@ -8,10 +8,7 @@ import TaskCard from "./components/TaskCard";
 import NewTask from "./components/NewTask";
 
 function Page() {
-  // Menyimpan daftar kartu tugas di setiap grup
-  const [group1Tasks, setGroup1Tasks] = useState<
-    { id: number; taskName: string; progress: number }[]
-  >([
+  const [group1Tasks, setGroup1Tasks] = useState([
     {
       id: 1,
       taskName: "Re-designed the zero-g doggie bags. No more spills!",
@@ -23,92 +20,82 @@ function Page() {
       progress: 30,
     },
   ]);
-  const [group3Tasks, setGroup3Tasks] = useState<
-    { id: number; taskName: string; progress: number }[]
-  >([
+  const [group3Tasks, setGroup3Tasks] = useState([
     {
       id: 3,
       taskName: "Data Migration: Performance & Culture End Game",
       progress: 60,
     },
   ]);
-
-  const [group4Tasks, setGroup4Tasks] = useState<
-    { id: number; taskName: string; progress: number }[]
-  >([
+  const [group4Tasks, setGroup4Tasks] = useState([
     {
       id: 4,
       taskName: "Bundle interplanetary analytics for improved transmission",
       progress: 20,
     },
   ]);
-
   const [group2Tasks, setGroup2Tasks] = useState<
     { id: number; taskName: string; progress: number }[]
   >([]);
 
   const handleMoveToGroup1 = (taskId: number) => {
-    const taskToMove = group2Tasks.find((task) => task.id === taskId);
-    if (taskToMove) {
+    const taskToMove2 = group2Tasks.find((task) => task.id === taskId);
+    if (taskToMove2) {
       setGroup2Tasks((prevTasks) =>
         prevTasks.filter((task) => task.id !== taskId)
       );
-      setGroup1Tasks((prevTasks) => [...prevTasks, taskToMove]);
+      setGroup1Tasks((prevTasks) => [...prevTasks, taskToMove2]);
+    }
+  };
+  const handleMoveToGroup2 = (taskId: number) => {
+    const taskToMove1 = group1Tasks.find((task) => task.id === taskId);
+    const taskToMove3 = group3Tasks.find((task) => task.id === taskId);
+    const taskToMove4 = group4Tasks.find((task) => task.id === taskId);
+
+    if (taskToMove1) {
+      setGroup1Tasks((prevTasks) =>
+        prevTasks.filter((task) => task.id !== taskId)
+      );
+      setGroup2Tasks((prevTasks) => [...prevTasks, taskToMove1]);
+    }
+    if (taskToMove3) {
+      setGroup3Tasks((prevTasks) =>
+        prevTasks.filter((task) => task.id !== taskId)
+      );
+      setGroup2Tasks((prevTasks) => [...prevTasks, taskToMove3]);
+    }
+    if (taskToMove4) {
+      setGroup4Tasks((prevTasks) =>
+        prevTasks.filter((task) => task.id !== taskId)
+      );
+      setGroup2Tasks((prevTasks) => [...prevTasks, taskToMove4]);
     }
   };
 
   const handleMoveToGroup3 = (taskId: number) => {
-    const taskToMove = group2Tasks.find((task) => task.id === taskId);
-    if (taskToMove) {
+    const taskToMove2 = group2Tasks.find((task) => task.id === taskId);
+    const taskToMove4 = group4Tasks.find((task) => task.id === taskId);
+    if (taskToMove2) {
       setGroup2Tasks((prevTasks) =>
         prevTasks.filter((task) => task.id !== taskId)
       );
-      setGroup3Tasks((prevTasks) => [...prevTasks, taskToMove]);
+      setGroup3Tasks((prevTasks) => [...prevTasks, taskToMove2]);
     }
-  };
-  const handleMoveToGroup4 = (taskId: number) => {
-    const taskToMove = group3Tasks.find((task) => task.id === taskId);
-    if (taskToMove) {
-      setGroup3Tasks((prevTasks) =>
-        prevTasks.filter((task) => task.id !== taskId)
-      );
-      setGroup4Tasks((prevTasks) => [...prevTasks, taskToMove]);
-    }
-  };
-
-  const handleMoveToGroup2 = (taskId: number) => {
-    // Temukan kartu tugas yang akan dipindahkan
-    const taskToMove = group1Tasks.find((task) => task.id === taskId);
-    const taskToMove3 = group3Tasks.find((task) => task.id === taskId);
-    const taskToMove4 = group4Tasks.find((task) => task.id === taskId);
-
-    if (taskToMove) {
-      // Hapus kartu tugas dari Grup 1
-      setGroup1Tasks((prevTasks) =>
-        prevTasks.filter((task) => task.id !== taskId)
-      );
-
-      // Tambahkan kartu tugas ke Grup 2
-      setGroup2Tasks((prevTasks) => [...prevTasks, taskToMove]);
-    }
-    if (taskToMove3) {
-      // Remove the task from Group 3
-      setGroup3Tasks((prevTasks) =>
-        prevTasks.filter((task) => task.id !== taskId)
-      );
-
-      // Add the task to Group 2
-      setGroup2Tasks((prevTasks) => [...prevTasks, taskToMove3]);
-    }
-
     if (taskToMove4) {
-      // Hapus kartu tugas dari Grup 1
       setGroup4Tasks((prevTasks) =>
         prevTasks.filter((task) => task.id !== taskId)
       );
+      setGroup3Tasks((prevTasks) => [...prevTasks, taskToMove4]);
+    }
+  };
 
-      // Tambahkan kartu tugas ke Grup 2
-      setGroup2Tasks((prevTasks) => [...prevTasks, taskToMove4]);
+  const handleMoveToGroup4 = (taskId: number) => {
+    const taskToMove4 = group3Tasks.find((task) => task.id === taskId);
+    if (taskToMove4) {
+      setGroup3Tasks((prevTasks) =>
+        prevTasks.filter((task) => task.id !== taskId)
+      );
+      setGroup4Tasks((prevTasks) => [...prevTasks, taskToMove4]);
     }
   };
 
@@ -119,18 +106,16 @@ function Page() {
         <MainCard
           groupName="Grup Task 1"
           taskCard={
-            group3Tasks.length > 0
-              ? group1Tasks
-                  .slice(0, 2)
-                  .map((task) => (
-                    <TaskCard
-                      key={task.id}
-                      taskName={task.taskName}
-                      progress={task.progress}
-                      onMoveToGroupRight={() => handleMoveToGroup2(task.id)}
-                    />
-                  ))
-              : [<TaskCard key={1} taskName="No Task" />]
+            group1Tasks.length > 0
+              ? group1Tasks.map((task) => (
+                  <TaskCard
+                    key={task.id}
+                    taskName={task.taskName}
+                    progress={task.progress}
+                    onMoveToGroupRight={() => handleMoveToGroup2(task.id)}
+                  />
+                ))
+              : [<TaskCard key="No Task" taskName="No Task" />]
           }
         />
 
@@ -147,7 +132,7 @@ function Page() {
                     onMoveToGroupRight={() => handleMoveToGroup3(task.id)}
                   />
                 ))
-              : [<TaskCard key={1} taskName="No Task" />]
+              : [<TaskCard key="No Task" taskName="No Task" />]
           }
         />
 
@@ -164,9 +149,10 @@ function Page() {
                     onMoveToGroupRight={() => handleMoveToGroup4(task.id)}
                   />
                 ))
-              : [<TaskCard key={1} taskName="No Task" />]
+              : [<TaskCard key="No Task" taskName="No Task" />]
           }
         />
+
         <MainCard
           groupName="Grup Task 4"
           taskCard={
@@ -179,11 +165,10 @@ function Page() {
                     onMoveToGroupLeft={() => handleMoveToGroup3(task.id)}
                   />
                 ))
-              : [<TaskCard key={1} taskName="No Task" />]
+              : [<TaskCard key="No Task" taskName="No Task" />]
           }
         />
       </div>
-      {/* <NewTask /> */}
     </div>
   );
 }
