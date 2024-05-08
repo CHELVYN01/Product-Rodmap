@@ -1,11 +1,13 @@
-// Page.tsx
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, useRef } from "react";
 import Navbar from "./components/Navbar";
 import MainCard from "./components/MainCard";
 import style from "./page.module.css";
 import TaskCard from "./components/TaskCard";
 import NewTask from "./components/NewTask";
+import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function Page() {
   const [group1Tasks, setGroup1Tasks] = useState([
@@ -47,6 +49,7 @@ function Page() {
       setGroup1Tasks((prevTasks) => [...prevTasks, taskToMove2]);
     }
   };
+
   const handleMoveToGroup2 = (taskId: number) => {
     const taskToMove1 = group1Tasks.find((task) => task.id === taskId);
     const taskToMove3 = group3Tasks.find((task) => task.id === taskId);
@@ -99,75 +102,144 @@ function Page() {
     }
   };
 
+  const Task = ({
+    id,
+    taskName,
+    groupIndex,
+  }: {
+    id: number;
+    taskName: string;
+    groupIndex: number;
+  }) => {
+    const ref = useRef<HTMLDivElement>(null); // Buat ref dengan tipe HTMLDivElement
+
+    const [{ isDragging }, drag] = useDrag({
+      type: "TASK",
+      item: { id, groupIndex },
+      collect: (monitor) => ({
+        isDragging: !!monitor.isDragging(),
+      }),
+    });
+
+    drag(ref); // Berikan ref kepada drag
+
+    let progress = 0;
+    switch (groupIndex) {
+      case 1:
+        progress = id === 1 ? 100 : 30;
+        break;
+      case 2:
+        progress = group2Tasks.find((task) => task.id === id)?.progress || 0;
+        break;
+      case 3:
+        progress = group3Tasks.find((task) => task.id === id)?.progress || 0;
+        break;
+      case 4:
+        progress = group4Tasks.find((task) => task.id === id)?.progress || 0;
+        break;
+      default:
+        progress = 0;
+        break;
+    }
+
+    return (
+      <div ref={ref} style={{ opacity: isDragging ? 0.5 : 1 }}>
+        <TaskCard
+          key={id}
+          taskName={taskName}
+          progress={progress}
+          onMoveToGroupLeft={
+            groupIndex === 2
+              ? () => handleMoveToGroup1(id)
+              : groupIndex === 3
+              ? () => handleMoveToGroup2(id)
+              : groupIndex === 4
+              ? () => handleMoveToGroup3(id)
+              : undefined
+          }
+          onMoveToGroupRight={
+            groupIndex === 1
+              ? () => handleMoveToGroup2(id)
+              : groupIndex === 2
+              ? () => handleMoveToGroup3(id)
+              : groupIndex === 3
+              ? () => handleMoveToGroup4(id)
+              : undefined
+          }
+        />
+      </div>
+    );
+  };
+
   return (
     <div>
       <Navbar />
       <div className={style.container}>
-        <MainCard
-          groupName="Grup Task 1"
-          taskCard={
-            group1Tasks.length > 0
-              ? group1Tasks.map((task) => (
-                  <TaskCard
-                    key={task.id}
-                    taskName={task.taskName}
-                    progress={task.progress}
-                    onMoveToGroupRight={() => handleMoveToGroup2(task.id)}
-                  />
-                ))
-              : [<TaskCard key="No Task" taskName="No Task" />]
-          }
-        />
+        <DndProvider backend={HTML5Backend}>
+          <MainCard
+            groupName="Grup Task 1"
+            taskCard={
+              group1Tasks.length > 0
+                ? group1Tasks.map((task) => (
+                    <Task
+                      key={task.id}
+                      id={task.id}
+                      taskName={task.taskName}
+                      groupIndex={1}
+                    />
+                  ))
+                : [<TaskCard key="No Task" taskName="No Task" />]
+            }
+          />
 
-        <MainCard
-          groupName="Grup Task 2"
-          taskCard={
-            group2Tasks.length > 0
-              ? group2Tasks.map((task) => (
-                  <TaskCard
-                    key={task.id}
-                    taskName={task.taskName}
-                    progress={task.progress}
-                    onMoveToGroupLeft={() => handleMoveToGroup1(task.id)}
-                    onMoveToGroupRight={() => handleMoveToGroup3(task.id)}
-                  />
-                ))
-              : [<TaskCard key="No Task" taskName="No Task" />]
-          }
-        />
+          <MainCard
+            groupName="Grup Task 2"
+            taskCard={
+              group2Tasks.length > 0
+                ? group2Tasks.map((task) => (
+                    <Task
+                      key={task.id}
+                      id={task.id}
+                      taskName={task.taskName}
+                      groupIndex={2}
+                    />
+                  ))
+                : [<TaskCard key="No Task" taskName="No Task" />]
+            }
+          />
 
-        <MainCard
-          groupName="Grup Task 3"
-          taskCard={
-            group3Tasks.length > 0
-              ? group3Tasks.map((task) => (
-                  <TaskCard
-                    key={task.id}
-                    taskName={task.taskName}
-                    progress={task.progress}
-                    onMoveToGroupLeft={() => handleMoveToGroup2(task.id)}
-                    onMoveToGroupRight={() => handleMoveToGroup4(task.id)}
-                  />
-                ))
-              : [<TaskCard key="No Task" taskName="No Task" />]
-          }
-        />
+          <MainCard
+            groupName="Grup Task 3"
+            taskCard={
+              group3Tasks.length > 0
+                ? group3Tasks.map((task) => (
+                    <Task
+                      key={task.id}
+                      id={task.id}
+                      taskName={task.taskName}
+                      groupIndex={3}
+                    />
+                  ))
+                : [<TaskCard key="No Task" taskName="No Task" />]
+            }
+          />
 
-        <MainCard
-          groupName="Grup Task 4"
-          taskCard={
-            group4Tasks.length > 0
-              ? group4Tasks.map((task) => (
-                  <TaskCard
-                    key={task.id}
-                    taskName={task.taskName}
-                    progress={task.progress}
-                    onMoveToGroupLeft={() => handleMoveToGroup3(task.id)}
-                  />
-                ))
-              : [<TaskCard key="No Task" taskName="No Task" />]
-          }
-        />
+          <MainCard
+            groupName="Grup Task 4"
+            taskCard={
+              group4Tasks.length > 0
+                ? group4Tasks.map((task) => (
+                    <Task
+                      key={task.id}
+                      id={task.id}
+                      taskName={task.taskName}
+                      groupIndex={4}
+                    />
+                  ))
+                : [<TaskCard key="No Task" taskName="No Task" />]
+            }
+          />
+        </DndProvider>
       </div>
     </div>
   );

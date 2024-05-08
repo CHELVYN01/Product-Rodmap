@@ -1,8 +1,8 @@
-"use client";
-import React from "react";
+import React, { useRef } from "react";
 import style from "./MainCard.module.css";
 import TaskCard from "../TaskCard";
 import NewTask from "../NewTask";
+import { useDrop } from "react-dnd";
 
 interface MainCardProps {
   groupName: string;
@@ -11,15 +11,27 @@ interface MainCardProps {
 
 function MainCard({ groupName, taskCard }: MainCardProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const ref = useRef<HTMLDivElement>(null); // Ref for the drop target
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const [{ isOver }, drop] = useDrop({
+    accept: "TASK",
+    drop: (item: { id: number; groupIndex: number }) => {
+      // Logic for dropping here
+    },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  });
+
+  drop(ref); // Attach the drop target to the div element
+
   let groupStyle;
   let dateCard;
 
-  // Menentukan gaya berdasarkan nama grup
   switch (groupName) {
     case "Grup Task 1":
       groupStyle = style.group1;
@@ -43,7 +55,7 @@ function MainCard({ groupName, taskCard }: MainCardProps) {
   }
 
   return (
-    <div className={style.container}>
+    <div ref={ref} className={`${style.container}`}>
       <div className={`${style.card} ${groupStyle}`}>
         <div className={style.name}>{groupName}</div>
         <div className={style.dateCard}>{dateCard}</div>
